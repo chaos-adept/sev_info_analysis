@@ -1,0 +1,16 @@
+apply plugin: 'scala'
+
+repositories {
+    mavenCentral()
+}
+
+ext.scalaMajorVesrion = '2.11'
+
+dependencies {
+    compile "org.scala-lang:scala-library:$scalaMajorVesrion.1"
+    testCompile "org.scalatest:scalatest_$scalaMajorVesrion:2.2.4"
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.useAnt = false
+}
