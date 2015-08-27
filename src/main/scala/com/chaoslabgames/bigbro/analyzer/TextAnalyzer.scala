@@ -1,4 +1,6 @@
-import java.util.concurrent.atomic.AtomicInteger
+package com.chaoslabgames.bigbro.analyzer
+
+import com.chaoslabgames.bigbro.datavalue.{TermWeight, Term}
 
 import scala.collection.mutable
 
@@ -43,5 +45,5 @@ class TextAnalyzer {
 
 }
 
-class Term(val name:String, var occurrence:Int, var docNum:Int)
-class TermWeight(val name:String, val value:Double)
+
+

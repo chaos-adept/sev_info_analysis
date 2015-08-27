@@ -1,4 +1,7 @@
+package com.chaoslabgames.bigbro.analyzer
+
 import org.scalatest._
+
 import scala.collection.Seq
 
 /**
