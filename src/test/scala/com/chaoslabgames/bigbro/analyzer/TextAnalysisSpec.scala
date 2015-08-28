@@ -37,9 +37,9 @@ class TextAnalysisSpec extends FlatSpec with Matchers {
 
   it should "calculate top terms" in {
     val analyzer = new TextAnalyzer
-    analyzer.push("it is red")
-    analyzer.push("it is blue")
-    analyzer.push("it is red, or it is quite red.")
+    analyzer.push("red")
+    analyzer.push("blue")
+    analyzer.push("blue") //blue is common word
 
     analyzer.topTerms(2).map(_.name) should equal (Seq("red", "blue"))
   }
