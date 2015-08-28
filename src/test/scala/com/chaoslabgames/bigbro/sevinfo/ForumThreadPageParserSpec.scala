@@ -10,7 +10,7 @@ import org.scalatest.{Matchers, FlatSpec}
  *         on 27.08.2015.
  */
 class ForumThreadPageParserSpec extends FlatSpec with Matchers {
-  it should " get list of threads " in {
+  it should " get list of posts " in {
     val scaner = new ForumThreadPageParser
     val stream = this.getClass.getResourceAsStream("/forum/samples/sevinfo/sample_1.html")
     val scanResults = scaner.scan(stream, Charset.forName("utf-8"), "http://localhost")
