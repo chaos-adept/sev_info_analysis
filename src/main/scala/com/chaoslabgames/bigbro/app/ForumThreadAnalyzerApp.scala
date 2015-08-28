@@ -28,6 +28,6 @@ object ForumThreadAnalyzerApp {
     })
 
 
-    textAnalyzer.topTerms(15).foreach( term => println(f"${term.name} ${term.value}%2.2f") )
+    textAnalyzer.topTerms(15).foreach( term => println(f"${term.name} ${term.value}%2.4f") )
   }
 }

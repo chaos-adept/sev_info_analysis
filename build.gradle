@@ -23,6 +23,9 @@ dependencies {
     compile "org.jsoup:jsoup:1.8.3"
     compile "com.jsuereth:scala-arm_$scalaMajorVesrion:1.4"
 
+    compile "org.apache.lucene:lucene-analyzers-common:5.2.1"
+    compile "org.apache.lucene:lucene-core:5.2.1"
+
     testCompile "org.scalatest:scalatest_$scalaMajorVesrion:2+"
     testRuntime 'org.pegdown:pegdown:1.1.0'
     testCompile "org.scalatest:scalatest_$scalaMajorVesrion:2.2.4"
