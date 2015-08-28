@@ -40,9 +40,14 @@ class TextAnalyzer {
 
   def topTerms(num:Int):Seq[TermWeight] = {
     //calc basic tf idf for each term
-    val termWeights = termDict.mapValues( term => Math.log10(term.occurrence) * (1 - term.docNum.toDouble/totalDocNum.toDouble)).toSeq
+    val termWeights = termDict.mapValues( term => calcTermWidth(term)).toSeq
     val tops = termWeights.sortBy(_._2).reverse.take(num).map( it => new TermWeight(name = it._1, value = it._2) )
     tops.toSeq
+  }
+
+  def calcTermWidth(term:Term): Double = {
+    val weight = Math.log(term.occurrence) * Math.log((totalDocNum.toDouble - term.docNum.toDouble + 0.5d) / (term.docNum.toDouble + 0.5d))
+    weight
   }
 
 }

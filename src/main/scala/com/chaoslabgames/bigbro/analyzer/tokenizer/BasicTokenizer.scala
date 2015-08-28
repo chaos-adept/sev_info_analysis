@@ -15,10 +15,11 @@ import scala.collection.mutable
  *         on 28.08.2015.
  */
 class BasicTokenizer {
+  val analyzer = new RussianAnalyzer()
+
   def tokenize(docText: String):Seq[String] = {
     val tokenList:mutable.MutableList[String] = mutable.MutableList()
 
-    val analyzer = new RussianAnalyzer()
     val reader: Reader = new StringReader(docText)
     try {
       val tokenStream: TokenStream = analyzer.tokenStream("contents", reader)
