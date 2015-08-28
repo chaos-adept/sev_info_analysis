@@ -19,7 +19,7 @@ class TextAnalysisSpec extends FlatSpec with Matchers {
   it should "calculate terms count" in {
     val analyzer = new TextAnalyzer
 
-    analyzer.push("i want by a Car")
+    analyzer.push("Red-Blue-Orange Old Car")
 
     analyzer.termCount should be (5)
   }

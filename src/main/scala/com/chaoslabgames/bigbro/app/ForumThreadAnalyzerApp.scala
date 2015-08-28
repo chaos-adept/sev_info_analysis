@@ -1,7 +1,9 @@
 package com.chaoslabgames.bigbro.app
 
-import java.net.URL
+import java.io.File
+import java.net.{URLEncoder, URL}
 import java.nio.charset.Charset
+import java.util.concurrent.atomic.AtomicInteger
 
 import com.chaoslabgames.bigbro.analyzer.TextAnalyzer
 import com.chaoslabgames.bigbro.sevinfo.{ForumThreadPageParser, ForumUtils}
@@ -22,29 +24,28 @@ object ForumThreadAnalyzerApp {
     val totalPosts = args(1).toInt
     val postsPerPage = args(2).toInt
 
-    val requestTimeOutPerThread = 1000
+    val requestTimeOutPerThread = 500
     val threadCount = 8
-    val topTermNum = 100
+    val topTermNum = 200
 
     val textAnalyzer = new TextAnalyzer
     val pageParser = new ForumThreadPageParser
     val postPages = ForumUtils.calcPageHrefs(threadUrl, totalPosts, postsPerPage)
     val parts = postPages.grouped(postPages.size / threadCount)
 
-
+    val counter = new AtomicInteger()
     val partFutures = Future.sequence( parts.map( part =>
       Future {
         part.foreach( pageUrl => {
-          for (is <- managed(new URL(pageUrl).openStream())) {
+          for (is <- managed(new URL(pageUrl).openStream())) { //fixme proxy or cache into dump
             val page = pageParser.scan(is, Charset.forName("utf-8"), threadUrl)
             textAnalyzer.synchronized {
-
               page.pagePosts.foreach { post =>
-                println(s"post message ${post.message}")
                 textAnalyzer.push(post.message)
               }
-              println(s"processed $pageUrl")
             }
+            counter.addAndGet(page.pagePosts.size)
+            println(s"processed ${counter.get()} of $totalPosts")
             Thread.sleep(requestTimeOutPerThread)
           }
     }) } ))
@@ -53,5 +54,8 @@ object ForumThreadAnalyzerApp {
 
     println(s"total token count: ${textAnalyzer.totalTokenCount}");
     textAnalyzer.topTerms(topTermNum).zipWithIndex.foreach { case (term, indx) => println(f"${indx + 1} - ${term.name} ${term.value}%2.4f") }
+
+    Seq("путин", "ватник", "укр").map(token => textAnalyzer.term(token)).foreach( term => println(f"${term.name} ${term.docNum}%2.4f") )
+
   }
 }

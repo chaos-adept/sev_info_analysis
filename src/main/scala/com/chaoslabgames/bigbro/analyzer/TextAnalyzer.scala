@@ -46,7 +46,7 @@ class TextAnalyzer {
   }
 
   def calcTermWidth(term:Term): Double = {
-    val weight = Math.log(term.occurrence) * (0.5 + Math.log((totalDocNum.toDouble - term.docNum.toDouble + 0.5d) / (term.docNum.toDouble + 0.5d)))
+    val weight = Math.log(term.occurrence) * (Math.log((totalDocNum.toDouble - term.docNum.toDouble + 0.5d) / (term.docNum.toDouble + 0.5d)))
     weight
   }
 

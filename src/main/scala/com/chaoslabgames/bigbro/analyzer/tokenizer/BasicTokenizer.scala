@@ -15,7 +15,7 @@ import scala.collection.mutable
  *         on 28.08.2015.
  */
 class BasicTokenizer {
-  val analyzer = new RussianAnalyzer()
+  val analyzer = new LowercaseWhitespaceTokenizer(2, 30)
 
   def tokenize(docText: String):Seq[String] = {
     val tokenList:mutable.MutableList[String] = mutable.MutableList()
