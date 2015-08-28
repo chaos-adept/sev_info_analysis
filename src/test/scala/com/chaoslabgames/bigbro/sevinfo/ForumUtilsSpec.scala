@@ -16,6 +16,7 @@ class ForumUtilsSpec extends FlatSpec with Matchers {
     pageHrefs should be (Seq(
       "http://localhost?f=1&t=2",
       "http://localhost?f=1&t=2&start=3",
+      "http://localhost?f=1&t=2&start=6",
       "http://localhost?f=1&t=2&start=9"))
   }
 }
