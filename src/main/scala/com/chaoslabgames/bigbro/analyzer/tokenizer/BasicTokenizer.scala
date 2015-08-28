@@ -29,6 +29,7 @@ class BasicTokenizer {
       while (tokenStream.incrementToken) {
         tokenList += term.toString
       }
+      tokenStream.close()
     }
     tokenList
   }

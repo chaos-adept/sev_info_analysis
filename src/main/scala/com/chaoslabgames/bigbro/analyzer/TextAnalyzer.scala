@@ -50,6 +50,10 @@ class TextAnalyzer {
     weight
   }
 
+  def totalTokenCount = {
+    termDict.size
+  }
+
 }
 
 

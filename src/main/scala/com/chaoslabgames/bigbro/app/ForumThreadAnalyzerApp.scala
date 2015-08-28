@@ -51,6 +51,7 @@ object ForumThreadAnalyzerApp {
 
     Await.result(partFutures, Duration.Inf)
 
+    println(s"total token count: ${textAnalyzer.totalTokenCount}");
     textAnalyzer.topTerms(topTermNum).zipWithIndex.foreach { case (term, indx) => println(f"${indx + 1} - ${term.name} ${term.value}%2.4f") }
   }
 }
